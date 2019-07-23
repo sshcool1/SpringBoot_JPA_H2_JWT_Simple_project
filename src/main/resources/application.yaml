@@ -1,0 +1,32 @@
+#default
+spring:
+  profiles:
+    active: local
+  datasource:
+    platform: h2
+    jdbc-url: jdbc:h2:mem:testdb
+    username: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: H2
+    show-sql: true
+    database: h2
+  h2:
+    console:
+      enabled: true
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+  application:
+    name: testBook
+  main:
+    allow-bean-definition-overriding: true
+
+
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+    accept-count: 100
+    max-threads: 400
+  connection-timeout: 20000
