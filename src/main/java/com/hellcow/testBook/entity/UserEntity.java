@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -12,8 +13,8 @@ import javax.persistence.*;
 public class UserEntity extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(length = 20, nullable = false)
+	private String userId;
 
 	@Column(length = 20, nullable = false)
 	private String name;
@@ -21,8 +22,13 @@ public class UserEntity extends BaseTimeEntity {
 	@Column(nullable = false)
 	private String password;
 
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId")
+	List<HistoryEntity> historyList;
+
 	@Builder
-	public UserEntity(String name, String password){
+	public UserEntity(String userId, String name, String password){
+		this.userId = userId;
 		this.name = name;
 		this.password = password;
 	}

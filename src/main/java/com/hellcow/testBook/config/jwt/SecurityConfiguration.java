@@ -15,11 +15,11 @@ import static com.hellcow.testBook.config.jwt.SecurityConstants.*;
 
 @EnableWebSecurity
 @Configuration
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public WebSecurity(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public SecurityConfiguration(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userDetailsService = userDetailsService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
@@ -30,8 +30,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		.cors().and()
 		.csrf().disable()
 		.authorizeRequests()
-		.antMatchers(HttpMethod.POST).permitAll()
-		.antMatchers(HttpMethod.GET, "/", SIGN_UP_URL).permitAll()
+		.antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+		.antMatchers(HttpMethod.POST, USER_SIGN_UP).permitAll()
+		.antMatchers(HttpMethod.GET, "**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager()))
