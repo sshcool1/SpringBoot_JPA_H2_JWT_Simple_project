@@ -50,4 +50,16 @@ public class UserService {
 		return save;
 	}
 
+	/**
+	 * 아이디로 사용자 찾기
+	 * @param data
+	 * @return
+	 * @throws ApiException
+	 */
+	public UserEntity findByUserId(ApiData data) throws ApiException {
+		Map<String, Object> param = data.getData();
+		UserEntity user = userRepository.findById(param.get("userId").toString()).get();
+		return user;
+	}
+
 }
