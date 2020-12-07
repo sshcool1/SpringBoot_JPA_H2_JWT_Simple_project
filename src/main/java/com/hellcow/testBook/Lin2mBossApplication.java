@@ -8,10 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class TestBookApplication {
+public class Lin2mBossApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestBookApplication.class, args);
+		SpringApplication.run(Lin2mBossApplication.class, args);
 	}
 
 	@Bean
